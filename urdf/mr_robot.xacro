@@ -74,14 +74,14 @@
     <inertia ixx="0.000915" iyy="0.000543" izz="0.001009" ixy="-0.0" iyz="-0.000147" ixz="-0.0"/>
   </inertial>
   <visual>
-    <origin xyz="9.4e-05 -0.183507 -0.005" rpy="0 0 0"/>
+    <origin xyz="9.4e-05 -0.104 -0.085" rpy="0 0 0"/>
     <geometry>
       <mesh filename="package://mr_robot_description/meshes/lidar_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
-    <origin xyz="9.4e-05 -0.183507 -0.005" rpy="0 0 0"/>
+    <origin xyz="9.4e-05 -0.104 -0.085" rpy="0 0 0"/>
     <geometry>
       <mesh filename="package://mr_robot_description/meshes/lidar_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
@@ -103,7 +103,7 @@
 </joint>
 
 <joint name="Rigid 11" type="fixed">
-  <origin xyz="-9.4e-05 0.183507 0.005" rpy="0 0 0"/>
+  <origin xyz="-9.4e-05 0.104 0.09" rpy="0 0 0"/>
   <parent link="base_link"/>
   <child link="lidar_1"/>
 </joint>
