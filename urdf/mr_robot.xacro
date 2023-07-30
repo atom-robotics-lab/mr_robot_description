@@ -27,7 +27,7 @@
 
 <link name="tyre_r_1">
   <inertial>
-    <origin xyz="0.06525409087830025 -7.085638543073307e-06 -0.0009998838120615534" rpy="0 0 0"/>
+    <origin xyz="0.06525409087830011 -7.03390812247892e-06 -0.0010000781645711151" rpy="0 0 0"/>
     <mass value="2.445514992570597"/>
     <inertia ixx="0.00501" iyy="0.003032" izz="0.003032" ixy="0.0" iyz="0.0" ixz="0.0"/>
   </inertial>
@@ -36,7 +36,7 @@
     <geometry>
       <mesh filename="package://mr_robot_description/meshes/tyre_r_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="silver"/>
+    <material name="black"/>
   </visual>
   <collision>
     <origin xyz="-0.050906 0.000201 -0.019723" rpy="0 0 0"/>
@@ -57,7 +57,7 @@
     <geometry>
       <mesh filename="package://mr_robot_description/meshes/tyre_l_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="silver"/>
+    <material name="black"/>
   </visual>
   <collision>
     <origin xyz="0.056979 -0.001216 -0.019723" rpy="0 0 0"/>
@@ -78,12 +78,55 @@
     <geometry>
       <mesh filename="package://mr_robot_description/meshes/lidar_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="silver"/>
+    <material name="blue"/>
   </visual>
   <collision>
     <origin xyz="9.4e-05 -0.104 -0.085" rpy="0 0 0"/>
     <geometry>
       <mesh filename="package://mr_robot_description/meshes/lidar_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="upper_panel_1">
+  <inertial>
+    <origin xyz="-0.18750361570760787 -0.169810681160802 0.01845928081380513" rpy="0 0 0"/>
+    <mass value="7.649753398983407"/>
+    <inertia ixx="0.097265" iyy="0.111429" izz="0.205922" ixy="-1.5e-05" iyz="0.001292" ixz="5e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.187549 -0.187451 -0.074" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://mr_robot_description/meshes/upper_panel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="translucent"/>
+ 
+  </visual>
+  <collision>
+    <origin xyz="-0.187549 -0.187451 -0.074" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://mr_robot_description/meshes/upper_panel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="V_Slot_1">
+  <inertial>
+    <origin xyz="-0.1901793582234545 -0.14650407539123805 0.010262998829977818" rpy="0 0 0"/>
+    <mass value="1.4085607585669755"/>
+    <inertia ixx="0.015757" iyy="0.005506" izz="0.021181" ixy="2.8e-05" iyz="-1.3e-05" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.189955 -0.189958 -0.108" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://mr_robot_description/meshes/V_Slot_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="dark_grey"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.189955 -0.189958 -0.108" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://mr_robot_description/meshes/V_Slot_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -106,6 +149,18 @@
   <origin xyz="-9.4e-05 0.104 0.09" rpy="0 0 0"/>
   <parent link="base_link"/>
   <child link="lidar_1"/>
+</joint>
+
+<joint name="Rigid 13" type="fixed">
+  <origin xyz="0.187549 0.187451 0.074" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="upper_panel_1"/>
+</joint>
+
+<joint name="Rigid 14" type="fixed">
+  <origin xyz="0.002406 0.002507 0.034" rpy="0 0 0"/>
+  <parent link="upper_panel_1"/>
+  <child link="V_Slot_1"/>
 </joint>
 
 </robot>
