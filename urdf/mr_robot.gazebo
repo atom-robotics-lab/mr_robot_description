@@ -14,8 +14,8 @@
       <updateRate>40</updateRate>
       <leftJoint>Revolute 10</leftJoint>
       <rightJoint>Revolute 9</rightJoint>
-      <wheelSeparation>0.23</wheelSeparation>
-      <wheelDiameter>0.112</wheelDiameter>
+      <wheelSeparation>0.293</wheelSeparation>
+      <wheelDiameter>0.110</wheelDiameter>
       <torque>20</torque>
       <commandTopic>cmd_vel</commandTopic>
       <odometryTopic>odom</odometryTopic>
@@ -30,7 +30,7 @@
       <wheelTorque>20</wheelTorque>
       <publishTf>true</publishTf>
       <publishOdom>true</publishOdom>
-            <publishOdomTF>true</publishOdomTF>
+      <publishOdomTF>true</publishOdomTF>
       <odometrySource>world</odometrySource>
       <!-- <covariance_x>0.0001</covariance_x>
             <covariance_y>0.0001</covariance_y>
