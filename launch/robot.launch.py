@@ -9,13 +9,14 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, Command
 from launch_ros.actions import Node
 from launch_ros.descriptions import ParameterValue
+from launch.substitutions import PythonExpression
 
 
 
 def generate_launch_description():	
 
 	# get the required paths of packages & files
-	pkg_ros_gz_sim = get_package_share_directory('ros_gz_sim')
+	pkg_ros_gz_sim = get_package_share_directory('gazebo_ros')
 	pkg_mr_robot_desc = get_package_share_directory('mr_robot_description')
 	xacro_path = pkg_mr_robot_desc + '/urdf/mr_robot.xacro'
 	
@@ -48,11 +49,12 @@ def generate_launch_description():
 								)
 
 	# spawn robot in gz sim using urdf
-	spawn_robot = Node(package = "ros_gz_sim",
-                           executable = "create",
+	spawn_robot = Node(package = "gazebo_ros",
+                           executable = "spawn_entity.py",
                            arguments = ["-topic", "/robot_description",
-                                        "-name", "mr_robot",
-                                        "-allow_renaming", "true",
+										'-entity', PythonExpression(['"', "", '_robot"']),
+                                        # "-name", "mr_robot",
+                                        # "-allow_renaming", "true",
                                         "-z", "0.0",
                                         "-x", "2.0",
                                         "-y", "0.0",
@@ -74,47 +76,47 @@ def generate_launch_description():
 			
 
 	# parameter bridge node to bridge different gz and tos 2 topics
-	ros_gz_bridge = Node(package="ros_gz_bridge", 
-				executable="parameter_bridge",
-                parameters = [
-                    {'config_file': bridge_config}],
-				condition=IfCondition(with_bridge)
-                )
+	# ros_gz_bridge = Node(package="ros_gz_bridge", 
+	# 			executable="parameter_bridge",
+    #             parameters = [
+    #                 {'config_file': bridge_config}],
+	# 			condition=IfCondition(with_bridge)
+    #             )
 
 	
-	lidar_stf = Node(package='tf2_ros', executable='static_transform_publisher',
-            name = 'lidar_stf',
-                arguments = [
-                    '0', '0', '0', '0', '0', '0', '1',
-                    'lidar_1',
-                    'mr_robot/base_link/front_rplidar'
-            ])
+	# lidar_stf = Node(package='tf2_ros', executable='static_transform_publisher',
+    #         name = 'lidar_stf',
+    #             arguments = [
+    #                 '0', '0', '0', '0', '0', '0', '1',
+    #                 'lidar_1',
+    #                 'mr_robot/base_link/front_rplidar'
+    #         ])
 
-	map_stf = Node(package='tf2_ros', executable='static_transform_publisher',
-            name = 'map_stf',
-                arguments = [
-                    '2.0', '0', '0', '0', '0', '-1.57', '100',
-                    'map',
-                    'odom'
-            ])
+	# map_stf = Node(package='tf2_ros', executable='static_transform_publisher',
+    #         name = 'map_stf',
+    #             arguments = [
+    #                 '2.0', '0', '0', '0', '0', '-1.57', '100',
+    #                 'map',
+    #                 'odom'
+    #         ])
 
-	kinect_stf = Node(package = 'tf2_ros', executable = 'static_transform_publisher',
-                     namespace = 'mr_robot_description',
-                     name = 'kinect_stf',
-                     arguments = ['0', '0', '0', '0', '0', '0', '1',
-                                  'kinect_camera',
-                                  'mr_robot/base_link/kinect_camera'
-                                  ]
-                      )
+	# kinect_stf = Node(package = 'tf2_ros', executable = 'static_transform_publisher',
+    #                  namespace = 'mr_robot_description',
+    #                  name = 'kinect_stf',
+    #                  arguments = ['0', '0', '0', '0', '0', '0', '1',
+    #                               'kinect_camera',
+    #                               'mr_robot/base_link/kinect_camera'
+    #                               ]
+    #                   )
 
-	camera_stf = Node(package = 'tf2_ros', executable = 'static_transform_publisher',
-                     namespace = 'mr_robot_description',
-                     name = 'camera_stf',
-                     arguments = ['0', '0', '0', '0', '0', '0', '1',
-                                  'camera_link',
-                                  'mr_robot/base_link/camera_link'
-                                  ]
-                      )
+	# camera_stf = Node(package = 'tf2_ros', executable = 'static_transform_publisher',
+    #                  namespace = 'mr_robot_description',
+    #                  name = 'camera_stf',
+    #                  arguments = ['0', '0', '0', '0', '0', '0', '1',
+    #                               'camera_link',
+    #                               'mr_robot/base_link/camera_link'
+    #                               ]
+                    #   )
 
 	# use_sim_time launch argument
 	arg_use_sim_time = DeclareLaunchArgument('use_sim_time',
@@ -151,11 +153,11 @@ def generate_launch_description():
 		lidar_enabled_arg,
 		camera_enabled_arg,
 		spawn_robot,
-		ros_gz_bridge,
+		# ros_gz_bridge,
 		rviz,
 		state_publisher,
-		lidar_stf,
-		map_stf,
-		kinect_stf,
-		camera_stf
+		# lidar_stf,
+		# map_stf,
+		# kinect_stf,
+		# camera_stf
 	])
